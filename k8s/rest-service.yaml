@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rest-service
+  namespace: scrapy-cluster
+spec:
+  ports:
+  - name: rest-port
+    port: 5343
+    targetPort: 5343
+  selector:
+    app: rest

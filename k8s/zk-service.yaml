@@ -1,0 +1,22 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: zookeeper-sv
+  namespace: scrapy-cluster
+spec:
+  type: LoadBalancer
+  externalIPs:
+    - 192.168.10.7
+  ports:
+  - name: 2181
+    port: 2181
+    protocol: TCP
+  - name: 2888
+    port: 2888
+    protocol: TCP
+  - name: 3888
+    port: 3888
+    protocol: TCP
+  selector:
+    app: zookeeper-dp
+

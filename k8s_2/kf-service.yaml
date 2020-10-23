@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-service
+  namespace: scrapy-cluster
+spec:
+  ports:
+  - name: kafka-port
+    port: 9092
+    targetPort: 9092
+    protocol: TCP
+  selector:
+    app: kafka
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-service2
+  namespace: scrapy-cluster
+spec:
+  ports:
+  - name: kafka-port
+    port: 9092
+    targetPort: 9092
+    protocol: TCP
+  selector:
+    app: kafka2
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-service3
+  namespace: scrapy-cluster
+spec:
+  ports:
+  - name: kafka-port
+    port: 9092
+    targetPort: 9092
+    protocol: TCP
+  selector:
+    app: kafka3
+

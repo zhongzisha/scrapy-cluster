@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-sv
+  namespace: scrapy-cluster
+spec:
+  type: LoadBalancer
+  externalIPs:
+    - 192.168.10.7
+  ports:
+    - name: port-9092
+      port: 9092
+      protocol: TCP
+  selector:
+    app: kafka-dp
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: kaf2
+#  namespace: scrapy-cluster
+#spec:
+#  type: LoadBalancer
+#  ports:
+#    - name: port-9092
+#      port: 9092
+#      protocol: TCP
+#  selector:
+#    app: kafka2
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: kaf3
+#  namespace: scrapy-cluster
+#spec:
+#  type: LoadBalancer
+#  ports:
+#    - name: port-9092
+#      port: 9092
+#      protocol: TCP
+#  selector:
+#    app: kafka3
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: kaf4
+#  namespace: scrapy-cluster
+#spec:
+#  type: LoadBalancer
+#  ports:
+#    - name: port-9092
+#      port: 9092
+#      protocol: TCP
+#  selector:
+#    app: kafka4
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: kaf5
+#  namespace: scrapy-cluster
+#spec:
+#  type: LoadBalancer
+#  ports:
+#    - name: port-9092
+#      port: 9092
+#      protocol: TCP
+#  selector:
+#    app: kafka5

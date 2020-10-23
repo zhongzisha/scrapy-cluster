@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: zookeeper
+  namespace: scrapy-cluster
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: zookeeper
+    spec:
+      containers:
+      - image: zookeeper
+        imagePullPolicy: IfNotPresent
+        name: zookeeper
+        ports:
+        - containerPort: 2181

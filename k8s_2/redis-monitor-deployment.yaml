@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: redis-monitor
+  namespace: scrapy-cluster
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis-monitor
+    spec:
+      containers:
+      - image: istresearch/scrapy-cluster:redis-monitor-1.2.2
+        imagePullPolicy: IfNotPresent
+        name: redis-monitor

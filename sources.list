@@ -1,0 +1,7 @@
+deb https://mirrors.tuna.tsinghua.edu.cn/debian buster main contrib non-free
+deb https://mirrors.tuna.tsinghua.edu.cn/debian buster-updates main contrib non-free
+deb https://mirrors.tuna.tsinghua.edu.cn/debian-security buster/updates main contrib non-free
+#backports请按需使用
+#deb https://mirrors.tuna.tsinghua.edu.cn/debian stretch-backports main contrib non-free 
+#buster请按需使用
+#deb https://mirrors.tuna.tsinghua.edu.cn/debian buster main

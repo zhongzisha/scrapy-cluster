@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: crawler
+  namespace: scrapy-cluster
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: crawler
+    spec:
+      containers:
+      - image: istresearch/scrapy-cluster:crawler-1.2.3
+        name: crawler

@@ -1,0 +1,16 @@
+ConcurrentLogHandler
+funcsigs
+future
+kafka-python
+kazoo
+mock
+nose
+pbr
+python-json-logger
+python-redis-lock
+PyYAML
+redis
+retrying
+six
+testfixtures
+ujson

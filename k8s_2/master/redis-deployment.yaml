@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: scrapy-cluster
+spec:
+  selector:
+    matchLabels:
+      app: redis
+      role: master
+      tier: backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+        role: master
+        tier: backend
+    spec:
+      containers:
+      - image: redis
+        imagePullPolicy: IfNotPresent
+        name: redis
+        ports:
+        - containerPort: 6379

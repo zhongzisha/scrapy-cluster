@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kafka
+  namespace: scrapy-cluster
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: kafka
+    spec:
+      containers:
+      - env:
+        - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
+          value: "1"
+        - name: KAFKA_ZOOKEEPER_CONNECT
+          value: zookeeper-service:2181
+        - name: KAFKA_ADVERTISED_PORT
+          value: "9092"
+        - name: KAFKA_ADVERTISED_HOST_NAME
+          value: 10.104.53.88 # kafka-service ClusterIP
+        - name: KAFKA_BROKER_ID
+          value: "1"
+        name: kafka
+        image: wurstmeister/kafka
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9092
+
+

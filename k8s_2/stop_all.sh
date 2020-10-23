@@ -1,0 +1,1 @@
+kubectl delete services,deployments,pods --all -n scrapy-cluster
