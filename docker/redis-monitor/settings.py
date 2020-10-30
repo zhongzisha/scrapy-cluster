@@ -24,8 +24,7 @@ KAFKA_PRODUCER_BUFFER_BYTES = 4 * 1024 * 1024  # 4MB before blocking
 # Zookeeper Settings
 ZOOKEEPER_ASSIGN_PATH = '/scrapy-cluster/crawler/'
 ZOOKEEPER_ID = '1'
-# ZOOKEEPER_HOSTS = os.getenv('ZOOKEEPER_HOSTS', 'zookeeper-service:2181')
-ZOOKEEPER_HOSTS = os.getenv('ZOOKEEPER_HOSTS', 'localhost:2181')
+ZOOKEEPER_HOSTS = os.getenv('ZOOKEEPER_HOSTS', 'zookeeper-service:2181')
 
 PLUGIN_DIR = "plugins/"
 PLUGINS = {

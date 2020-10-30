@@ -15,7 +15,7 @@ def readme():
         return f.read()
 
 install_requires = [
-    'python-use_json-logger',
+    'python-json-logger',
     'ConcurrentLogHandler>=0.9.1',
     'redis',
     'kazoo>=2.2.1',
