@@ -1,4 +1,4 @@
-FROM python:2.7
+FROM python:3.8
 MAINTAINER Madison Bahmer scrapy-cluster-tech@istresearch.com
 
 # os setup

@@ -11,7 +11,7 @@ import mock
 import json
 import flask
 
-from kafka.common import OffsetOutOfRangeError
+from kafka.errors import OffsetOutOfRangeError
 from kafka.conn import ConnectionStates
 from redis.exceptions import ConnectionError
 

@@ -79,5 +79,6 @@ class TestKafkaMonitor(TestCase):
         self.redis_conn.delete("cluster:test")
         self.kafka_monitor.close()
 
+
 if __name__ == '__main__':
     unittest.main()

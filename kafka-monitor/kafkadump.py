@@ -33,7 +33,7 @@ def main():
                              help="The override Kafka host")
     base_parser.add_argument('-s', '--settings', action='store', required=False,
                              help="The settings file to read from",
-                             default="settings.py")
+                             default="localsettings.py")
     base_parser.add_argument('-ll', '--log-level', action='store', required=False,
                              help="The log level", default=None,
                              choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'])

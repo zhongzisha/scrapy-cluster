@@ -1,13 +1,13 @@
 # THIS FILE SHOULD STAY IN SYNC WITH /kafka-monitor/settings.py
 
 import os
+
+
 def str2bool(v):
     return str(v).lower() in ('true', '1') if type(v) == str else bool(v)
 
+
 # Redis host information
-# REDIS_HOST = os.getenv('REDIS_HOST', 'redis')
-# REDIS_PORT = int(os.getenv('REDIS_PORT', 6379))
-# REDIS_DB = int(os.getenv('REDIS_DB', 0))
 REDIS_HOST = 'redis-service'
 REDIS_PORT = 6379
 REDIS_DB = 0
@@ -41,7 +41,7 @@ LOG_FILE = 'kafka_monitor.log'
 LOG_MAX_BYTES = 10 * 1024 * 1024
 LOG_BACKUPS = 5
 LOG_STDOUT = str2bool(os.getenv('LOG_STDOUT', True))
-LOG_JSON = str2bool(os.getenv('LOG_JSON', False))
+LOG_USE_JSON = str2bool(os.getenv('LOG_USE_JSON', False))
 LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
 
 # stats setup

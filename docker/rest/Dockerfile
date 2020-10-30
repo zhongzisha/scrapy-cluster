@@ -1,4 +1,4 @@
-FROM python:2.7
+FROM python:3.8
 MAINTAINER Madison Bahmer <madison.bahmer@istresearch.com>
 
 # os setup

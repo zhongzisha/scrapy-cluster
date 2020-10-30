@@ -11,9 +11,6 @@ FLASK_LOGGING_ENABLED = os.getenv('FLASK_LOGGING_ENABLED', True)
 FLASK_PORT = int(os.getenv('FLASK_PORT', 5343))
 
 # Redis host information
-# REDIS_HOST = os.getenv('REDIS_HOST', 'redis')
-# REDIS_PORT = int(os.getenv('REDIS_PORT', 6379))
-# REDIS_DB = int(os.getenv('REDIS_DB', 0))
 REDIS_HOST = 'redis-service'
 REDIS_PORT = 6379
 REDIS_DB = 0
@@ -41,7 +38,7 @@ LOG_FILE = 'rest_service.log'
 LOG_MAX_BYTES = 10 * 1024 * 1024
 LOG_BACKUPS = 5
 LOG_STDOUT = str2bool(os.getenv('LOG_STDOUT', True))
-LOG_JSON = str2bool(os.getenv('LOG_JSON', False))
+LOG_USE_JSON = str2bool(os.getenv('LOG_USE_JSON', False))
 LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
 
 # internal configuration

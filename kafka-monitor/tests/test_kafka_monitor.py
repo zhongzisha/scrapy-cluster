@@ -9,7 +9,7 @@ from mock import MagicMock
 from kafka_monitor import KafkaMonitor
 from plugins.base_handler import BaseHandler
 
-from kafka.common import OffsetOutOfRangeError
+from kafka.errors import OffsetOutOfRangeError
 from jsonschema import Draft4Validator
 
 

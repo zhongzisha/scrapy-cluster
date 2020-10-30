@@ -18,7 +18,7 @@ from plugins.stats_handler import StatsHandler
 from plugins.zookeeper_handler import ZookeeperHandler
 import copy
 
-from kafka.common import OffsetOutOfRangeError
+from kafka.errors import OffsetOutOfRangeError
 from jsonschema import Draft4Validator
 import tldextract
 
