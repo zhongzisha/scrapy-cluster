@@ -23,7 +23,7 @@
           },
           "match_mapping_type" : "keyword",
           "match" : "*"
-      }
+        }
       } ],
       "properties" : {
         "@version" : {

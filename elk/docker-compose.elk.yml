@@ -85,7 +85,7 @@ services:
     command: logstash -f /etc/logstash/conf.d/logstash.conf
     volumes:
       - ./scrapy-cluster-logstash-docker.conf:/etc/logstash/conf.d/logstash.conf
-      - ./logs-template.use_json:/etc/logstash/templates/logs-template.use_json
+      - ./logs-template.json:/etc/logstash/templates/logs-template.json
       - logs:/var/log/scrapy-cluster
     ports:
       - "5000:5000"

@@ -3,12 +3,22 @@ version: '2'
 services:
   kafka_monitor:
     image: istresearch/scrapy-cluster:kafka-monitor-dev
+    volumes:
+      - logs:/usr/src/app/logs
+    environment:
+      - LOG_STDOUT=False
+      - LOG_USE_JSON=True
     depends_on:
       - kafka-service
       - redis-service
     restart: always
   redis_monitor:
     image: istresearch/scrapy-cluster:redis-monitor-dev
+    volumes:
+      - logs:/usr/src/app/logs
+    environment:
+      - LOG_STDOUT=False
+      - LOG_USE_JSON=True
     depends_on:
       - kafka-service
       - redis-service
@@ -16,6 +26,11 @@ services:
     restart: always
   crawler:
     image: istresearch/scrapy-cluster:crawler-dev
+    volumes:
+      - logs:/usr/src/app/logs
+    environment:
+      - SC_LOG_STDOUT=False
+      - SC_LOG_JSON=True
     depends_on:
       - kafka-service
       - redis-service
@@ -23,6 +38,11 @@ services:
     restart: always
   rest:
     image: istresearch/scrapy-cluster:rest-dev
+    volumes:
+      - logs:/usr/src/app/logs
+    environment:
+      - LOG_STDOUT=False
+      - LOG_USE_JSON=True
     depends_on:
       - kafka-service
       - redis-service
@@ -54,3 +74,6 @@ services:
     depends_on:
       - zookeeper-service
     restart: always
+
+volumes:
+  logs:

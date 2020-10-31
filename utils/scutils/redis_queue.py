@@ -39,7 +39,7 @@ class Base(object):
 
         :param item: The object be serializable
         """
-        print('RedisQueue--encode_item', item)
+        # print('RedisQueue--encode_item', item)
         if self.encoding.__name__ == 'pickle':
             return self.encoding.dumps(item, protocol=-1)
         else:
@@ -49,7 +49,7 @@ class Base(object):
         """
         Decode an item previously encoded
         """
-        print('RedisQueue--decode_item', encoded_item)
+        # print('RedisQueue--decode_item', encoded_item)
         return self.encoding.loads(encoded_item.decode('utf-8'))
 
     def __len__(self):

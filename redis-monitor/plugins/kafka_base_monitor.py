@@ -75,7 +75,7 @@ class KafkaBaseMonitor(BaseMonitor):
         firehose_topic = "{prefix}.outbound_firehose".format(
                                                     prefix=self.topic_prefix)
 
-        print('master', type(master), master)
+        # print('master', type(master), master)
 
         try:
             # dont want logger in outbound kafka message

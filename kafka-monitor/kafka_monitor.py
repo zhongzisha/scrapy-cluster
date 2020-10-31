@@ -276,7 +276,6 @@ class KafkaMonitor(object):
                             key = key.decode('utf-8')
                         # to prevent reference modification
                         the_dict = copy.deepcopy(loaded_dict)
-                        print(key, the_dict)
                         obj = self.plugins_dict[key]
                         instance = obj['instance']
                         schema = obj['schema']

@@ -188,11 +188,8 @@ class DistributedScheduler(object):
         self.logger.info("update_domain_queues done")
 
     def error_config(self, message):
-        extras = {}
-        extras['message'] = message
-        extras['revert_window'] = self.window
-        extras['revert_hits'] = self.hits
-        extras['spiderid'] = self.spider.name
+        extras = {'err_message': message, 'revert_window': self.window, 'revert_hits': self.hits,
+                  'spiderid': self.spider.name}
         self.logger.info("Lost config from Zookeeper", extra=extras)
         # lost connection to zookeeper, reverting back to defaults
         for key in self.domain_config:
@@ -298,7 +295,6 @@ class DistributedScheduler(object):
         '''
         Updates the scheduler so it knows its own ip address
         '''
-        self.logger.info("update_ipaddress")
         # assign local ip in case of exception
         self.old_ip = self.my_ip
         self.my_ip = '127.0.0.1'
@@ -321,8 +317,6 @@ class DistributedScheduler(object):
         # if self.old_ip != self.my_ip:
         #     self.logger.info("Changed Public IP: {old} -> {new}".format(
         #         old=self.old_ip, new=self.my_ip))
-
-        self.logger.info("update ipaddress done.")
 
     def report_self(self):
         '''
@@ -423,14 +417,14 @@ class DistributedScheduler(object):
         '''
 
         self.logger.info("Pushes a request from the spider into the proper throttled queue")
-        print('request0: ', request)
+        # print('request0: ', request)
 
         if not request.dont_filter and self.dupefilter.request_seen(request):
             self.logger.info("Request not added back to redis")
             return
         req_dict = self.request_to_dict(request)
 
-        print('request1: ', req_dict)
+        # ('request1: ', req_dict)
 
         if not self.is_blacklisted(req_dict['meta']['appid'],
                                    req_dict['meta']['crawlid']):
@@ -441,7 +435,7 @@ class DistributedScheduler(object):
                 dom=ex_res.domain,
                 suf=ex_res.suffix)
 
-            print(type(key), key)
+            # print(type(key), key)
 
             curr_time = time.time()
 
@@ -535,7 +529,6 @@ class DistributedScheduler(object):
         Logic to handle getting a new url request, from a bunch of
         different queues
         '''
-        self.logger.info("next_request()")
 
         t = time.time()
         # update the redis queues every so often
@@ -551,7 +544,7 @@ class DistributedScheduler(object):
             self.report_self()
 
         item = self.find_item()
-        print('next request item: ', item)
+        # print('next request item: ', item)
 
         if item is not None:
             self.logger.info("Found url to crawl {url}" \

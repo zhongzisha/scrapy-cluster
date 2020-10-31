@@ -90,9 +90,9 @@ def main():
             logger.error(message)
             sys.exit(1)
         logger.info('Running list command')
-        print("Topics:")
-        for topic in list(consumer.topics()):
-            print("-", topic)
+        # print("Topics:")
+        # for topic in list(consumer.topics()):
+        #     print("-", topic)
         logger.info("Closing Kafka connection")
         try:
             consumer.close()
@@ -122,9 +122,9 @@ def main():
                 enable_auto_commit=settings['KAFKA_CONSUMER_AUTO_COMMIT_ENABLE'],
                 max_partition_fetch_bytes=settings['KAFKA_CONSUMER_FETCH_MESSAGE_MAX_BYTES'])
 
-            print("Topics:")
-            for topic in list(consumer.topics()):
-                print("-", topic)
+            # print("Topics:")
+            # for topic in list(consumer.topics()):
+            #     print("-", topic)
 
         except NoBrokersAvailable as ex:
             logger.error('Unable to connect to Kafka')
@@ -137,28 +137,28 @@ def main():
         while True:
             try:
                 for message in consumer:
-                    print(num_records, message)
+                    # print(num_records, message)
                     if message is None:
                         logger.info("no message")
                         break
                     logger.info("Received message")
                     val = message.value
-                    if True:  # try:
+                    try:
                         item = json.loads(val)
                         if args['decode_base64'] and 'body' in item:
                             item['body'] = base64.b64decode(item['body'].encode('utf-8'))
 
                         if args['no_body'] and 'body' in item:
                             del item['body']
-                    else:  # except ValueError:
+                    except ValueError:
                         logger.info("Message is not a JSON object")
                         item = val
                     body_bytes = len(item)
 
-                    if args['pretty']:
-                        print(json.dumps(item, indent=4))
-                    else:
-                        print(item)
+                    # if args['pretty']:
+                    #     print(json.dumps(item, indent=4))
+                    # else:
+                    #     print(item)
                     num_records = num_records + 1
                     total_bytes = total_bytes + body_bytes
             except KeyboardInterrupt:
@@ -169,9 +169,9 @@ def main():
             #     break
 
         total_mbs = old_div(float(total_bytes), (1024 * 1024))
-        if item is not None:
-            print("Last item:")
-            print(json.dumps(item, indent=4))
+        # if item is not None:
+        #     print("Last item:")
+        #     print(json.dumps(item, indent=4))
         if num_records > 0:
             logger.info("Num Records: {n}, Total MBs: {m}, kb per message: {kb}"
                         .format(n=num_records, m=total_mbs,

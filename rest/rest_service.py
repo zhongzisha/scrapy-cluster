@@ -270,7 +270,7 @@ class RestService(object):
         """Processes messages received from kafka"""
         try:
             for message in self.consumer:
-                print('message', type(message), message)
+                # print('message', type(message), message)
                 try:
                     if message is None:
                         self.logger.info("no message")
@@ -555,12 +555,12 @@ class RestService(object):
         :returns: A boolean indicating whther the data was sent successfully or not
         """
 
-        print('_feed_to_kafka', json_item)
+        # print('_feed_to_kafka', json_item)
 
         # @MethodTimer.timeout(self.settings['KAFKA_FEED_TIMEOUT'], False)
         def _feed(json_item):
-            if True: #try:
-                print('_feed', json_item)
+            try:
+                # print('_feed', json_item)
                 self.logger.info("Sending json to kafka at " +
                                  str(self.settings['KAFKA_PRODUCER_TOPIC']))
                 future = self.producer.send(self.settings['KAFKA_PRODUCER_TOPIC'],
@@ -572,11 +572,11 @@ class RestService(object):
 
                 return True
 
-            else: # except Exception as e:
+            except Exception as e:
                 self.logger.error("Lost connection to Kafka")
                 self._spawn_kafka_connection_thread()
                 return False
-            return False
+            # return False
 
         return _feed(json_item)
 
@@ -626,11 +626,11 @@ class RestService(object):
             json_item = request.get_json()
             self.wait_for_response = False
 
-            print(type(json_item), json_item)
+            # print(type(json_item), json_item)
 
             result = self._feed_to_kafka(json_item)
 
-            print('kafka result: ', result)
+            # print('kafka result: ', result)
 
             if 'uuid' in json_item:
                 self.wait_for_response = True

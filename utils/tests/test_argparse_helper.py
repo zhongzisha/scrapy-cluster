@@ -38,7 +38,7 @@ class TestArgparseHelper(TestCase):
 
         feed_parser = subparsers.add_parser('feed', help='Feed the script',
                                             parents=[base_parser])
-        feed_parser.add_argument('use_json', help='The JSON object as a string')
+        feed_parser.add_argument('json', help='The JSON object as a string')
 
         run_parser = subparsers.add_parser('run', help='Run the script',
                                            parents=[base_parser])
@@ -58,7 +58,7 @@ optional arguments:
   -h, --help  show this help message and exit
 
 Command 'feed'
-usage: nosetests feed [-h] [-s SETTINGS] use_json
+usage: nosetests feed [-h] [-s SETTINGS] json
 
 Command 'run'
 usage: nosetests run [-h] [-s SETTINGS]'''

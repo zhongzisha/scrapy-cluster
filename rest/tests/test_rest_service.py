@@ -50,13 +50,13 @@ class TestRestService(TestCase):
         self.rest_service.settings = self.rest_service.wrapper.load("settings.py")
         self.rest_service.logger = MagicMock()
 
-    @mock.patch('os.listdir', MagicMock(return_value=['hey.use_json']))
+    @mock.patch('os.listdir', MagicMock(return_value=['hey.json']))
     @mock.patch('__builtin__.open', mock_open(read_data='bibble'), create=True)
     def test_load_schemas_bad(self):
         with self.assertRaises(ValueError):
             self.rest_service._load_schemas()
 
-    @mock.patch('os.listdir', MagicMock(return_value=['hey2.use_json']))
+    @mock.patch('os.listdir', MagicMock(return_value=['hey2.json']))
     @mock.patch('__builtin__.open', mock_open(read_data='{\"stuff\":\"value\"}'), create=True)
     def test_load_schemas_bad(self):
         self.rest_service._load_schemas()
@@ -397,10 +397,10 @@ class TestRestService(TestCase):
         override = Override('settings.py')
         override.logger = MagicMock()
 
-        # bad use_json
+        # bad json
         data = '["a list", ashdasd ,\\ !]'
         with self.rest_service.app.test_request_context(data=data,
-                                                        content_type='application/use_json'):
+                                                        content_type='application/json'):
             results = override.test_json()
             self.assertTrue(override.logger.error.called)
             self.assertEquals(override.logger.error.call_args[0][0],
@@ -417,7 +417,7 @@ class TestRestService(TestCase):
             self.assertEquals(data, d)
             self.assertEquals(results[1], 400)
 
-        # no use_json
+        # no json
         data = '["a list", ashdasd ,\\ !]'
         with self.rest_service.app.test_request_context(data=data):
             self.rest_service.logger.error.reset_mock()
@@ -437,10 +437,10 @@ class TestRestService(TestCase):
             self.assertEquals(data, d)
             self.assertEquals(results[1], 400)
 
-        # good use_json
+        # good json
         data = '["a list", "2", "3"]'
         with self.rest_service.app.test_request_context(data=data,
-                                                        content_type='application/use_json'):
+                                                        content_type='application/json'):
             override.logger.reset_mock()
             results = override.test_json()
             self.assertFalse(override.logger.error.called)
@@ -469,7 +469,7 @@ class TestRestService(TestCase):
         # valid schema
         data = '{"value": "data here"}'
         with self.rest_service.app.test_request_context(data=data,
-                                                        content_type='application/use_json'):
+                                                        content_type='application/json'):
             results = override.test_schema()
             self.assertFalse(override.logger.error.called)
             self.assertEquals(results, 'data')
@@ -477,7 +477,7 @@ class TestRestService(TestCase):
         # invalid schema
         data = '{"otherkey": "bad data"}'
         with self.rest_service.app.test_request_context(data=data,
-                                                        content_type='application/use_json'):
+                                                        content_type='application/json'):
             results = override.test_schema()
             self.assertTrue(override.logger.error.called)
             self.assertEquals(override.logger.error.call_args[0][0],
@@ -518,7 +518,7 @@ class TestRestService(TestCase):
         self.rest_service.logger.warn = MagicMock()
 
         with self.rest_service.app.test_request_context(data='{}',
-                                                        content_type='application/use_json'):
+                                                        content_type='application/json'):
             results = self.rest_service.feed()
             self.assertTrue(self.rest_service.logger.warn.called)
             d = {
@@ -537,7 +537,7 @@ class TestRestService(TestCase):
         # test failed to send to kafka
         self.rest_service._feed_to_kafka = MagicMock(return_value=False)
         with self.rest_service.app.test_request_context(data='{}',
-                                                        content_type='application/use_json'):
+                                                        content_type='application/json'):
             self.rest_service.logger.warn.reset_mock()
             results = self.rest_service.feed()
             self.assertTrue(self.rest_service.logger.warn.called)
@@ -555,7 +555,7 @@ class TestRestService(TestCase):
         # test no uuid
         self.rest_service._feed_to_kafka = MagicMock(return_value=True)
         with self.rest_service.app.test_request_context(data='{}',
-                                                        content_type='application/use_json'):
+                                                        content_type='application/json'):
             results = self.rest_service.feed()
             d = {
                 u'data': None,
@@ -576,7 +576,7 @@ class TestRestService(TestCase):
             return r
 
         with self.rest_service.app.test_request_context(data='{"uuid":"key"}',
-                                                        content_type='application/use_json'):
+                                                        content_type='application/json'):
             self.rest_service.get_time = MagicMock(side_effect=fancy_get_time)
             results = self.rest_service.feed()
             d = {
@@ -595,7 +595,7 @@ class TestRestService(TestCase):
             return time_list.pop(0)
 
         with self.rest_service.app.test_request_context(data='{"uuid":"key"}',
-                                                        content_type='application/use_json'):
+                                                        content_type='application/json'):
             self.rest_service.get_time = MagicMock(side_effect=fancy_get_time2)
             results = self.rest_service.feed()
             d = {
@@ -619,7 +619,7 @@ class TestRestService(TestCase):
         self.rest_service.logger.warn = MagicMock()
 
         with self.rest_service.app.test_request_context(data='{}',
-                                                        content_type='application/use_json'):
+                                                        content_type='application/json'):
             results = self.rest_service.poll()
             self.assertTrue(self.rest_service.logger.warn.called)
             d = {
@@ -638,7 +638,7 @@ class TestRestService(TestCase):
         self.rest_service.redis_conn.get = MagicMock(return_value='["data"]')
         self.rest_service.redis_connected = True
         with self.rest_service.app.test_request_context(data='{"poll_id":"key"}',
-                                                        content_type='application/use_json'):
+                                                        content_type='application/json'):
             results = self.rest_service.poll()
             d = {
                 u'data': ['data'],
@@ -653,7 +653,7 @@ class TestRestService(TestCase):
         self.rest_service.redis_conn.get = MagicMock(return_value=None)
         self.rest_service.redis_connected = True
         with self.rest_service.app.test_request_context(data='{"poll_id":"key"}',
-                                                        content_type='application/use_json'):
+                                                        content_type='application/json'):
             results = self.rest_service.poll()
             d = {
                 u'data': None,
@@ -670,7 +670,7 @@ class TestRestService(TestCase):
         self.rest_service._spawn_redis_connection_thread = MagicMock()
         self.rest_service.logger.error = MagicMock()
         with self.rest_service.app.test_request_context(data='{"poll_id":"key"}',
-                                                        content_type='application/use_json'):
+                                                        content_type='application/json'):
             self.rest_service.redis_conn.get = MagicMock(side_effect=ConnectionError)
             results = self.rest_service.poll()
             self.assertTrue(self.rest_service.logger.error.called)
@@ -691,7 +691,7 @@ class TestRestService(TestCase):
         # test value error
         self.rest_service.logger.warning = MagicMock()
         with self.rest_service.app.test_request_context(data='{"poll_id":"key"}',
-                                                        content_type='application/use_json'):
+                                                        content_type='application/json'):
             self.rest_service.redis_conn.get = MagicMock(side_effect=ValueError)
             results = self.rest_service.poll()
             self.assertTrue(self.rest_service.logger.warning.called)
