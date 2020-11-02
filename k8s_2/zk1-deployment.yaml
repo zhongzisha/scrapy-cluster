@@ -14,8 +14,8 @@ spec:
       - image: zookeeper
         imagePullPolicy: IfNotPresent
         name: zookeeper
-        ports:
-        - containerPort: 2181
+
+        - containe        ports:rPort: 2181
         - containerPort: 2888
         - containerPort: 3888
         env:
