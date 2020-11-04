@@ -81,71 +81,7 @@ async def run3():
     print('end', datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
 
-url = "https://movie.douban.com/top250"
-header = {
-    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36",
-    "content-type": "text/plain;charset=UTF-8",
-}
-
-
-async def fetch_content(url):
-    # await asyncio.sleep(1) 防止请求过快，等待1秒
-    async with aiohttp.ClientSession(
-        headers=header, connector=aiohttp.TCPConnector(ssl=False)
-    ) as session:
-        async with session.get(url) as response:
-            return await response.text()
-
-async def parse(url):
-    page = await fetch_content(url)
-    html = etree.HTML(page)
-
-    xpath_movie = '//*[@id="content"]/div/div[1]/ol/li'
-    xpath_title = './/span[@class="title"]'
-    xpath_pages = '//*[@id="content"]/div/div[1]/div[2]/a'
-    xpath_descs = './/span[@class="inq"]'
-    xpath_links = './/div[@class="info"]/div[@class="hd"]/a'
-
-    pages = html.xpath(xpath_pages)
-    fetch_list = []
-    result = []
-
-    for element_movie in html.xpath(xpath_movie):
-        result.append(element_movie)
-
-    for p in pages:
-        fetch_list.append(url + p.get("href"))
-
-    tasks = [fetch_content(url) for url in fetch_list]
-    pages = await asyncio.gather(*tasks)
-
-    for page in pages:
-        html = etree.HTML(page)
-        for element_movie in html.xpath(xpath_movie):
-            result.append(element_movie)
-
-    for i, movie in enumerate(result, 1):
-        title = movie.find(xpath_title).text
-        desc = (
-            "<" + movie.find(xpath_descs).text + ">"
-            if movie.find(xpath_descs) is not None
-            else None
-        )
-        link = movie.find(xpath_links).get("href")
-        print(i, title, desc, link)
-
-
-async def main3():
-    start = time()
-    for i in range(5):
-        await parse(url)
-    end = time()
-    print("Cost {} seconds".format((end - start)/5))
-
-
 if __name__ == '__main__':
     # run1()
     # run2()
-    # asyncio.run(run3())
-
-    asyncio.run(main3())
+    asyncio.run(run3())
