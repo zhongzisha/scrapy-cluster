@@ -48,3 +48,6 @@ tldextract
 ujson
 w3lib
 zope.interface
+pymysql
+pyMongo
+aiohttp

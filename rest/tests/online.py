@@ -26,7 +26,7 @@ class TestRestService(TestCase):
         self.rest_service.settings['FLASK_PORT'] = self.port_number
 
         def run_server():
-            self.rest_service.run()
+            run()
 
         self._server_thread = Thread(target=run_server)
         self._server_thread.setDaemon(True)
