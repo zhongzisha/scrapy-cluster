@@ -10,10 +10,10 @@ from crawling.spiders.redis_spider import RedisSpider
 
 
 class LinkSpider(RedisSpider):
-    '''
+    """
     A spider that walks all links from the requested URL. This is
     the entrypoint for generic crawling.
-    '''
+    """
     name = "link"
 
     def __init__(self, *args, **kwargs):

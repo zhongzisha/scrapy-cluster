@@ -2,9 +2,10 @@
 FLASK_LOGGING_ENABLED = True
 FLASK_PORT = 5343 # Hex representation of 'SC'
 
-# Redis host information
-REDIS_HOST = 'localhost'    # 单机
+# Redis host configuration
+# REDIS_HOST = 'localhost'    # 单机
 # REDIS_HOST = 'redis-service'    # docker
+REDIS_HOST = 'master'    # 集群
 REDIS_PORT = 6379
 REDIS_DB = 0
 

@@ -5,9 +5,10 @@ from __future__ import absolute_import
 # Scrapy Cluster Settings
 # ~~~~~~~~~~~~~~~~~~~~~~~
 
-# Specify the host and port to use when connecting to Redis.
-REDIS_HOST = 'localhost'    # 单机
+# Redis host configuration
+# REDIS_HOST = 'localhost'    # 单机
 # REDIS_HOST = 'redis-service'    # docker
+REDIS_HOST = 'master'    # 集群
 REDIS_PORT = 6379
 REDIS_DB = 0
 

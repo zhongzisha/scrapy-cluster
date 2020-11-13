@@ -8,9 +8,9 @@ class MetaPassthroughMiddleware(object):
         self.setup(settings)
 
     def setup(self, settings):
-        '''
+        """
         Does the actual setup of the middleware
-        '''
+        """
         # set up the default sc logger
         my_level = settings.get('SC_LOG_LEVEL', 'INFO')
         my_name = settings.get('SC_LOGGER_NAME', 'sc-logger')
@@ -35,10 +35,10 @@ class MetaPassthroughMiddleware(object):
         return cls(crawler.settings)
 
     def process_spider_output(self, response, result, spider):
-        '''
+        """
         Ensures the meta data from the response is passed
         through in any Request's generated from the spider
-        '''
+        """
         self.logger.info("processing meta passthrough middleware")
         if 'maxdepth' in response.meta:
             self.logger.info(response.meta["maxdepth"])

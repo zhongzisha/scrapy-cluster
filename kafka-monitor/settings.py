@@ -2,8 +2,9 @@
 # to override please use a custom localsettings.py file
 
 # Redis host information
-REDIS_HOST = 'localhost'    # 单机
+# REDIS_HOST = 'localhost'    # 单机
 # REDIS_HOST = 'redis-service'    # docker
+REDIS_HOST = 'master'    # 集群
 REDIS_PORT = 6379
 REDIS_DB = 0
 

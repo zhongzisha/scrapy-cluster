@@ -496,9 +496,9 @@ class DistributedScheduler(object):
         return req_dict
 
     def find_item(self):
-        '''
+        """
         Finds an item from the throttled queues
-        '''
+        """
         random.shuffle(self.queue_keys)
         count = 0
 
@@ -525,10 +525,10 @@ class DistributedScheduler(object):
         return None
 
     def next_request(self):
-        '''
+        """
         Logic to handle getting a new url request, from a bunch of
         different queues
-        '''
+        """
 
         t = time.time()
         # update the redis queues every so often
@@ -594,11 +594,11 @@ class DistributedScheduler(object):
         return None
 
     def parse_cookie(self, string):
-        '''
+        """
         Parses a cookie string like returned in a Set-Cookie header
         @param string: The cookie string
         @return: the cookie dict
-        '''
+        """
         self.logger.info("parse_cookie()")
         results = re.findall('([^=]+)=([^\;]+);?\s?', string)
         my_dict = {}
@@ -608,8 +608,8 @@ class DistributedScheduler(object):
         return my_dict
 
     def has_pending_requests(self):
-        '''
+        """
         We never want to say we have pending requests
         If this returns True scrapy sometimes hangs.
-        '''
+        """
         return False

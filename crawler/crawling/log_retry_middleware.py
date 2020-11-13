@@ -28,9 +28,9 @@ class LogRetryMiddleware(object):
         self.setup(settings)
 
     def setup(self, settings):
-        '''
+        """
         Does the actual setup of the middleware
-        '''
+        """
         # set up the default sc logger
         my_level = settings.get('SC_LOG_LEVEL', 'INFO')
         my_name = settings.get('SC_LOGGER_NAME', 'sc-logger')
