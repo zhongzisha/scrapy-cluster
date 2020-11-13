@@ -3,12 +3,14 @@ FLASK_LOGGING_ENABLED = True
 FLASK_PORT = 5343 # Hex representation of 'SC'
 
 # Redis host information
-REDIS_HOST = 'localhost'
+REDIS_HOST = 'localhost'    # 单机
+# REDIS_HOST = 'redis-service'    # docker
 REDIS_PORT = 6379
 REDIS_DB = 0
 
 # Kafka server information ------------
-KAFKA_HOSTS = ['localhost:9092']
+# KAFKA_HOSTS = ['localhost:9092']  # 单机
+KAFKA_HOSTS = ['master:9092','slave2:9092','slave3:9092']  # 集群
 KAFKA_TOPIC_PREFIX = 'demo'
 KAFKA_FEED_TIMEOUT = 10
 

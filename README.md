@@ -58,3 +58,25 @@ Please check out the official [Scrapy Cluster 1.2.1 documentation](http://scrapy
 The `master` branch of this repository contains the latest stable release code for `Scrapy Cluster 1.2.1`.
 
 The `dev` branch contains bleeding edge code and is currently working towards [Scrapy Cluster 1.3](https://github.com/istresearch/scrapy-cluster/milestone/3). Please note that not everything may be documented, finished, tested, or finalized but we are happy to help guide those who are interested.
+
+## Cluster 集群部署
+
+3台节点：slave1, slave2, slave3
+
+3台节点的独立zookeeper集群，3台节点的独立kafka集群，redis部署在master的docker容器内。
+部署好这两个集群后，
+在master上单机运行爬虫，是可以的。
+```
+python kafka-monitor.py run
+python redis-monitor.py
+python rest-monitor.py
+scrapy runspider crawling/spiders/link_spider.py
+python kafka-monitor.py dump -t demo.incoming -p
+python kafka-monitor.py dump -t demo.crawled_fihose
+python kafka-monitor.py dump -t demo.outbound_fihose
+curl http://localhost:5343   # 查看restful服务状态
+# 向集群提交一个爬取请求
+curl http://localhost:5343/feed -H "Content-Type: application/json" -d '{"url": "http://msn.com", "appid":"testapp", "crawlid":"ABC1234", "maxdepth":2}'
+```
+
+

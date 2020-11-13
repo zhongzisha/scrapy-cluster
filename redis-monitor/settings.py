@@ -2,11 +2,13 @@
 # to override please use a custom localsettings.py file
 
 # Redis host configuration
-REDIS_HOST = 'localhost'
+REDIS_HOST = 'localhost'    # 单机
+# REDIS_HOST = 'redis-service'    # docker
 REDIS_PORT = 6379
 REDIS_DB = 0
 
-KAFKA_HOSTS = 'localhost:9092'
+# KAFKA_HOSTS = ['localhost:9092']  # 单机
+KAFKA_HOSTS = ['master:9092','slave2:9092','slave3:9092']  # 集群
 KAFKA_TOPIC_PREFIX = 'demo'
 KAFKA_CONN_TIMEOUT = 5
 KAFKA_APPID_TOPICS = False
@@ -16,7 +18,9 @@ KAFKA_PRODUCER_BUFFER_BYTES = 4 * 1024 * 1024  # 4MB before blocking
 # Zookeeper Settings
 ZOOKEEPER_ASSIGN_PATH = '/scrapy-cluster/crawler/'
 ZOOKEEPER_ID = 'all'
-ZOOKEEPER_HOSTS = 'localhost:2181'
+#　ZOOKEEPER_HOSTS = 'localhost:2181'   # 单机
+ZOOKEEPER_HOSTS = 'slave1:2181,slave2:2181,slave3:2181'   # 集群
+
 
 PLUGIN_DIR = "plugins/"
 PLUGINS = {

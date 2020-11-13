@@ -90,9 +90,9 @@ def main():
             logger.error(message)
             sys.exit(1)
         logger.info('Running list command')
-        # print("Topics:")
-        # for topic in list(consumer.topics()):
-        #     print("-", topic)
+        print("Topics:")
+        for topic in list(consumer.topics()):
+            print("-", topic)
         logger.info("Closing Kafka connection")
         try:
             consumer.close()
@@ -155,10 +155,10 @@ def main():
                         item = val
                     body_bytes = len(item)
 
-                    # if args['pretty']:
-                    #     print(json.dumps(item, indent=4))
-                    # else:
-                    #     print(item)
+                    if args['pretty']:
+                        print(json.dumps(item, indent=4))
+                    else:
+                        print(item)
                     num_records = num_records + 1
                     total_bytes = total_bytes + body_bytes
             except KeyboardInterrupt:
