@@ -28,7 +28,7 @@ KAFKA_PRODUCER_BUFFER_BYTES = 4 * 1024 * 1024  # 4MB before blocking
 
 # logging setup
 LOGGER_NAME = 'rest-service'
-LOG_DIR = 'logs'
+LOG_DIR = '/tmp/scrapy-cluster/logs/'
 LOG_FILE = 'rest_service.log'
 LOG_MAX_BYTES = 10 * 1024 * 1024
 LOG_BACKUPS = 5

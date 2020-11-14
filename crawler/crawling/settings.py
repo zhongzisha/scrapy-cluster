@@ -90,7 +90,7 @@ SCHEDULER_QUEUE_TIMEOUT = 3600
 
 # log setup scrapy cluster crawler
 SC_LOGGER_NAME = 'sc-crawler'
-SC_LOG_DIR = 'logs'
+SC_LOG_DIR = '/tmp/scrapy-cluster/logs/'
 SC_LOG_FILE = 'sc_crawler.log'
 SC_LOG_MAX_BYTES = 10 * 1024 * 1024
 SC_LOG_BACKUPS = 5

@@ -34,7 +34,7 @@ PLUGINS = {
 
 # logging setup
 LOGGER_NAME = 'redis-monitor'
-LOG_DIR = 'logs'
+LOG_DIR = '/tmp/scrapy-cluster/logs/'
 LOG_FILE = 'redis_monitor.log'
 LOG_MAX_BYTES = 10 * 1024 * 1024
 LOG_BACKUPS = 5

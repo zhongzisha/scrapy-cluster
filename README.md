@@ -65,7 +65,7 @@ The `dev` branch contains bleeding edge code and is currently working towards [S
 
 3台节点的独立zookeeper集群，3台节点的独立kafka集群，redis部署在master的docker容器内。
 先在slave1, slave2, slave3上启动zookeeper集群；
-在master, slave2, slave3上启动kafka集群；
+在master, slave2, slave3上启动kafka集群； `./kafka-server-start.sh ../config/server.properties`
 在master上开启hadoop集群；
 在master上开启hbase集群；
 jps查看每个节点的进程。
@@ -77,8 +77,8 @@ python redis-monitor.py
 python rest-monitor.py
 scrapy runspider crawling/spiders/link_spider.py
 python kafka-monitor.py dump -t demo.incoming -p
-python kafka-monitor.py dump -t demo.crawled_fihose
-python kafka-monitor.py dump -t demo.outbound_fihose
+python kafka-monitor.py dump -t demo.crawled_firehose -p
+python kafka-monitor.py dump -t demo.outbound_firehose -p
 curl http://localhost:5343   # 查看restful服务状态
 # 向集群提交一个爬取请求
 curl http://localhost:5343/feed -H "Content-Type: application/json" -d '{"url": "http://msn.com", "appid":"testapp", "crawlid":"ABC1234", "maxdepth":2}'
@@ -90,8 +90,11 @@ apt install build-essential gcc g++ python3-virtualenv python3-dev
 virtualenv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+pip install -e scutils-1.2.0
 ```
 
 修改了kafka_monitor的maxdepth，然后搞了一个简单网站，所有链接到网页都能爬到。似乎可行了。
+
+curl http://localhost:5343/feed -H "Content-Type: application/json" -d '{"url": "http://10.0.7.216:8082.com", "appid":"testapp", "crawlid":"ABC1234", "maxdepth":20}'
 
 
