@@ -92,4 +92,5 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+修改了kafka_monitor的maxdepth，然后搞了一个简单网站，所有链接到网页都能爬到。似乎可行了。
 
