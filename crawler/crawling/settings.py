@@ -94,9 +94,9 @@ SC_LOG_DIR = 'logs'
 SC_LOG_FILE = 'sc_crawler.log'
 SC_LOG_MAX_BYTES = 10 * 1024 * 1024
 SC_LOG_BACKUPS = 5
-SC_LOG_STDOUT = True
-SC_LOG_JSON = False
-SC_LOG_LEVEL = 'DEBUG' #'INFO'
+SC_LOG_STDOUT = False  # True
+SC_LOG_USE_JSON = True  # False
+SC_LOG_LEVEL = 'DEBUG'  # 'INFO'
 
 
 # stats setup

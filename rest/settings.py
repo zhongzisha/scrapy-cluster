@@ -32,9 +32,9 @@ LOG_DIR = 'logs'
 LOG_FILE = 'rest_service.log'
 LOG_MAX_BYTES = 10 * 1024 * 1024
 LOG_BACKUPS = 5
-LOG_STDOUT = True
-LOG_USE_JSON = False
-LOG_LEVEL = 'INFO'
+LOG_STDOUT = False  # True
+LOG_USE_JSON = True # False
+LOG_LEVEL = 'DEBUG'
 
 # internal configuration
 SLEEP_TIME = 5

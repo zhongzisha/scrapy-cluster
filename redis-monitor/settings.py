@@ -38,9 +38,9 @@ LOG_DIR = 'logs'
 LOG_FILE = 'redis_monitor.log'
 LOG_MAX_BYTES = 10 * 1024 * 1024
 LOG_BACKUPS = 5
-LOG_STDOUT = True
-LOG_USE_JSON = False
-LOG_LEVEL = 'INFO'
+LOG_STDOUT = False  # True
+LOG_USE_JSON = True # False
+LOG_LEVEL = 'DEBUG'
 
 # stats setup
 STATS_TOTAL = True

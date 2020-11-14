@@ -167,7 +167,7 @@ class RestService(object):
 
         @param level: the log level
         @param log_file: boolean t/f whether to log to a file, else stdout
-        @param use_json: boolean t/f whether to write the logs in json
+        @param log_use_json: boolean t/f whether to write the logs in json
         """
         self.settings = self.wrapper.load(self.settings_name)
 
