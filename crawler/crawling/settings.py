@@ -17,7 +17,7 @@ REDIS_DB = 0
 KAFKA_HOSTS = ['master:9092','slave2:9092','slave3:9092']  # 集群
 KAFKA_TOPIC_PREFIX = 'demo'
 KAFKA_APPID_TOPICS = False
-# base64 encode the html body to avoid use_json dump errors due to malformed text
+# base64 encode the html body to avoid json dump errors due to malformed text
 KAFKA_BASE_64_ENCODE = True
 KAFKA_PRODUCER_BATCH_LINGER_MS = 25  # 25 ms before flush
 KAFKA_PRODUCER_BUFFER_BYTES = 4 * 1024 * 1024  # 4MB before blocking
@@ -25,7 +25,7 @@ KAFKA_PRODUCER_BUFFER_BYTES = 4 * 1024 * 1024  # 4MB before blocking
 ZOOKEEPER_ASSIGN_PATH = '/scrapy-cluster/crawler/'
 ZOOKEEPER_ID = '1'
 #　ZOOKEEPER_HOSTS = 'localhost:2181'   # 单机
-ZOOKEEPER_HOSTS = 'slave1:2181,slave2:2181,slave3:2181'   # 集群
+ZOOKEEPER_HOSTS = 'slave1:2181,slave2:2181,slave3:2181'   # 集群  zkServer.sh status
 
 PUBLIC_IP_URL = 'http://ip.42.pl/raw'
 IP_ADDR_REGEX = '(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'
