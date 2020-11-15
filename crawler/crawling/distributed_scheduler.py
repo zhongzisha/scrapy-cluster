@@ -358,7 +358,7 @@ class DistributedScheduler(object):
         my_file = settings.get('SC_LOG_FILE', 'main.log')
         my_backups = settings.get('SC_LOG_BACKUPS', 5)
 
-        logger = LogFactory.get_instance(json=my_json,
+        logger = LogFactory.get_instance(use_json=my_json,
                                          name=my_name,
                                          stdout=my_output,
                                          level=my_level,

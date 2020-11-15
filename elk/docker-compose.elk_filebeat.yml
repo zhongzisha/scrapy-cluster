@@ -33,7 +33,7 @@ services:
       - logs:/usr/src/app/logs
     environment:
       - SC_LOG_STDOUT=False
-      - SC_LOG_JSON=True
+      - SC_LOG_USE_JSON=True
     depends_on:
       - kafka-service
       - redis-service

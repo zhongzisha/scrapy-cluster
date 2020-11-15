@@ -95,6 +95,6 @@ pip install -e scutils-1.2.0
 
 修改了kafka_monitor的maxdepth，然后搞了一个简单网站，所有链接到网页都能爬到。似乎可行了。
 
-curl http://localhost:5343/feed -H "Content-Type: application/json" -d '{"url": "http://10.0.7.216:8082.com", "appid":"testapp", "crawlid":"ABC1234", "maxdepth":20}'
+curl http://localhost:5343/feed -H "Content-Type: application/json" -d '{"url": "http://10.0.7.216:8082", "appid":"testapp", "crawlid":"ABC1234", "maxdepth":20}'
 
 

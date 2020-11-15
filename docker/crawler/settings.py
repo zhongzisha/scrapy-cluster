@@ -96,7 +96,7 @@ SC_LOG_FILE = 'sc_crawler.log'
 SC_LOG_MAX_BYTES = 10 * 1024 * 1024
 SC_LOG_BACKUPS = 5
 SC_LOG_STDOUT = str2bool(os.getenv('SC_LOG_STDOUT', True))
-SC_LOG_JSON = str2bool(os.getenv('SC_LOG_JSON', False))
+SC_LOG_USE_JSON = str2bool(os.getenv('SC_LOG_USE_JSON', False))
 SC_LOG_LEVEL = os.getenv('SC_LOG_LEVEL', 'INFO')
 
 
