@@ -97,4 +97,9 @@ pip install -e scutils-1.2.0
 
 curl http://localhost:5343/feed -H "Content-Type: application/json" -d '{"url": "http://10.0.7.216:8082", "appid":"testapp", "crawlid":"ABC1234", "maxdepth":20}'
 
-
+如果爬取中断了，重启master。然后依次
+1. 先启动zk集群。进入slave1,slave2,slave3启动每一台机器的zk。
+2. 启动kafka集群。进入master,slave2,slave3启动每一台机器的kafka。
+3. 启动ELK。进入master, 启动es, logstask, kibana，然后进入master/slave1/slave2/slave3启动filebeat。
+4. 进入master, 运行deploy_to_slaves.sh，在slave1/slave2/slave3上启动爬虫。
+5. 进入master，运行start_all.sh，即可重新开始爬取进程。这时如果docker的resis-service中数据没有丢失，队列里还有需要爬的网址时，可以继续爬。

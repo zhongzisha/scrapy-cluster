@@ -1,16 +1,18 @@
 LOG_DIR=/tmp/scrapy-cluster/logs/
 
-rm -rf $LOG_DIR
-mkdir -p ${LOG_DIR}
-#if [ ! -d ${LOG_DIR} ]; then
-#  mkdir -p ${LOG_DIR}
-#fi
+# rm -rf $LOG_DIR
+# mkdir -p ${LOG_DIR}
+if [ ! -d ${LOG_DIR} ]; then
+  mkdir -p ${LOG_DIR}
+fi
 
 if [ ! -d venv ]; then
   virtualenv venv
   source venv/bin/activate
   pip install -r requirements.txt
   pip install -e scutils-1.2.0
+else
+  source venv/bin/activate
 fi
 
 SESSION=scrapy_cluster
