@@ -53,3 +53,6 @@ pyMongo
 aiohttp
 elasticsearch
 Pillow
+thrift
+genpy
+pika

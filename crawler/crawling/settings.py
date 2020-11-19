@@ -1,4 +1,5 @@
 from __future__ import absolute_import
+
 # This file houses all default settings for the Crawler
 # to override please use a custom localsettings.py file
 
@@ -8,13 +9,13 @@ from __future__ import absolute_import
 # Redis host configuration
 # REDIS_HOST = 'localhost'    # 单机
 # REDIS_HOST = 'redis-service'    # docker
-REDIS_HOST = 'master'    # 集群
+REDIS_HOST = 'master'  # 集群
 REDIS_PORT = 6379
 REDIS_DB = 0
 
 # Kafka server information
 # KAFKA_HOSTS = ['localhost:9092']  # 单机
-KAFKA_HOSTS = ['master:9092','slave2:9092','slave3:9092']  # 集群
+KAFKA_HOSTS = ['master:9092', 'slave2:9092', 'slave3:9092']  # 集群
 KAFKA_TOPIC_PREFIX = 'demo'
 KAFKA_APPID_TOPICS = False
 # base64 encode the html body to avoid json dump errors due to malformed text
@@ -24,8 +25,8 @@ KAFKA_PRODUCER_BUFFER_BYTES = 4 * 1024 * 1024  # 4MB before blocking
 
 ZOOKEEPER_ASSIGN_PATH = '/scrapy-cluster/crawler/'
 ZOOKEEPER_ID = '1'
-#　ZOOKEEPER_HOSTS = 'localhost:2181'   # 单机
-ZOOKEEPER_HOSTS = 'slave1:2181,slave2:2181,slave3:2181'   # 集群  zkServer.sh status
+# 　ZOOKEEPER_HOSTS = 'localhost:2181'   # 单机
+ZOOKEEPER_HOSTS = 'slave1:2181,slave2:2181,slave3:2181'  # 集群  zkServer.sh status
 
 PUBLIC_IP_URL = 'http://ip.42.pl/raw'
 IP_ADDR_REGEX = '(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'
@@ -98,7 +99,6 @@ SC_LOG_STDOUT = False  # True
 SC_LOG_USE_JSON = True  # False
 SC_LOG_LEVEL = 'DEBUG'  # 'INFO'
 
-
 # stats setup
 STATS_STATUS_CODES = True
 STATS_RESPONSE_CODES = [
@@ -129,8 +129,6 @@ NEWSPIDER_MODULE = 'crawling.spiders'
 
 # Enables scheduling storing requests queue in redis.
 SCHEDULER = "crawling.distributed_scheduler.DistributedScheduler"
-
-
 
 # Store scraped item in redis for post-processing.
 ITEM_PIPELINES = {
