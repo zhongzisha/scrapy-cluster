@@ -99,7 +99,53 @@ curl http://localhost:5343/feed -H "Content-Type: application/json" -d '{"url": 
 
 如果爬取中断了，重启master。然后依次
 1. 先启动zk集群。进入slave1,slave2,slave3启动每一台机器的zk。
+```
+ssh slave1
+cd /opt/apache-zookeeper-3.6.2-bin/bin
+./zkServer.sh start
+```
+
 2. 启动kafka集群。进入master,slave2,slave3启动每一台机器的kafka。
+
+```
+cd /opt/kafka_2.13-2.6.0-bin/bin
+./kafka-server-start.sh ../config/server.properties
+```
+
+3. 启动hadoop和hbase集群。进入master。
+
+```
+cd /opt/hadoop-2.10.1-bin/sbin
+./start-dfs.sh
+./start-yarn.sh
+
+cd /opt/hbase-2.3.3/bin
+./start-hbase.sh
+```
+
 3. 启动ELK。进入master, 启动es, logstask, kibana，然后进入master/slave1/slave2/slave3启动filebeat。
+
+```
+cd /media/ubuntu/Working/elasticsearch/elasticsearch-7.10.0/bin
+./elasticsearch
+```
+
+```
+cd /media/ubuntu/Working/elasticsearch/logstash-7.10.0
+./bin/logstash -f config/logstash_scrapy_cluster.conf
+```
+
+```
+cd /media/ubuntu/Working/elasticsearch/kibana-7.10.0-linux-x86_64/bin
+./kibana
+```
+
+```
+cd /media/ubuntu/Working/elasticsearch/filebeat-7.10.0-linux-x86_64
+./filebeat
+```
+
 4. 进入master, 运行deploy_to_slaves.sh，在slave1/slave2/slave3上启动爬虫。
 5. 进入master，运行start_all.sh，即可重新开始爬取进程。这时如果docker的resis-service中数据没有丢失，队列里还有需要爬的网址时，可以继续爬。
+
+
