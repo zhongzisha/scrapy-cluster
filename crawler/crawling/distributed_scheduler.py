@@ -37,11 +37,11 @@ from scutils.log_factory import LogFactory
 
 
 class DistributedScheduler(object):
-    '''
+    """
     Scrapy request scheduler that utilizes Redis Throttled Priority Queues
     to moderate different domain scrape requests within a distributed scrapy
     cluster
-    '''
+    """
     redis_conn = None  # the redis connection
     queue_dict = None  # the dict of throttled queues
     spider = None  # the spider using this scheduler
@@ -73,9 +73,9 @@ class DistributedScheduler(object):
     def __init__(self, server, persist, update_int, timeout, retries, logger,
                  hits, window, mod, ip_refresh, add_type, add_ip, ip_regex,
                  backlog_blacklist, queue_timeout):
-        '''
+        """
         Initialize the scheduler
-        '''
+        """
         self.redis_conn = server
         self.persist = persist
         self.queue_dict = {}
@@ -139,10 +139,10 @@ class DistributedScheduler(object):
         self.create_queues()
 
     def load_domain_config(self, loaded_config):
-        '''
+        """
         Loads the domain_config and sets up queue_dict
         @param loaded_config: the yaml loaded config dict from zookeeper
-        '''
+        """
         self.logger.info("load_domain_config")
         self.domain_config = {}
         # vetting process to ensure correct configs
@@ -481,7 +481,7 @@ class DistributedScheduler(object):
             # urls should be safe (safe_string_url)
             'url': to_unicode(request.url),
             'method': request.method,
-            #'headers': dict(request.headers),
+            # 'headers': dict(request.headers),
             'body': request.body.decode('utf-8'),
             'cookies': request.cookies,
             'meta': request.meta,

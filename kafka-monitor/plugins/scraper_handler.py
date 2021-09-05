@@ -12,9 +12,9 @@ class ScraperHandler(BaseHandler):
     schema = "scraper_schema.json"
 
     def setup(self, settings):
-        '''
+        """
         Setup redis and tldextract
-        '''
+        """
         self.extract = tldextract.TLDExtract()
         self.redis_conn = redis.Redis(host=settings['REDIS_HOST'],
                                       port=settings['REDIS_PORT'],
@@ -29,11 +29,11 @@ class ScraperHandler(BaseHandler):
             sys.exit(1)
 
     def handle(self, dict):
-        '''
+        """
         Processes a vaild crawl request
 
         @param dict: a valid dictionary object
-        '''
+        """
 
         self.logger.info("handle in ScraperHandler")
 

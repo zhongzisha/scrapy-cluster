@@ -11,7 +11,7 @@ def main():
     from kazoo.client import KazooClient
 
     parser = argparse.ArgumentParser(
-            description="Crawler config file pusher to Zookeeper")
+        description="Crawler config file pusher to Zookeeper")
     parser.add_argument('-f', '--file', action='store', required=True,
                         help="The yaml file to use")
     parser.add_argument('-i', '--id', action='store', default="all",
@@ -52,6 +52,7 @@ def main():
             zk.set(path + id, None)
 
     zk.stop()
+
 
 if __name__ == "__main__":
     sys.exit(main())

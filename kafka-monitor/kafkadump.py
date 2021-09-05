@@ -146,7 +146,9 @@ def main():
                     try:
                         item = json.loads(val)
                         if args['decode_base64'] and 'body' in item:
-                            item['body'] = base64.b64decode(item['body'].encode('utf-8'))
+                            # item['body'] = base64.b64decode(item['body'].encode('utf-8'))
+                            # item['body'] = str(base64.b64decode(item['body'].encode('utf-8')))
+                            item['body'] = base64.b64decode(item['body']).decode('utf-8')
 
                         if args['no_body'] and 'body' in item:
                             del item['body']

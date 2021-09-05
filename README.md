@@ -76,9 +76,9 @@ python kafka-monitor.py run
 python redis-monitor.py
 python rest-monitor.py
 scrapy runspider crawling/spiders/link_spider.py
-python kafka-monitor.py dump -t demo.incoming -p
-python kafka-monitor.py dump -t demo.crawled_firehose -p
-python kafka-monitor.py dump -t demo.outbound_firehose -p
+python kafkadump.py dump -t demo.incoming -p
+python kafkadump.py dump -t demo.crawled_firehose -p
+python kafkadump.py dump -t demo.outbound_firehose -p
 curl http://localhost:5343   # 查看restful服务状态
 # 向集群提交一个爬取请求
 curl http://localhost:5343/feed -H "Content-Type: application/json" -d '{"url": "http://msn.com", "appid":"testapp", "crawlid":"ABC1234", "maxdepth":2}'
@@ -96,6 +96,14 @@ pip install -e scutils-1.2.0
 修改了kafka_monitor的maxdepth，然后搞了一个简单网站，所有链接到网页都能爬到。似乎可行了。
 
 curl http://localhost:5343/feed -H "Content-Type: application/json" -d '{"url": "http://10.0.7.216:8082", "appid":"testapp", "crawlid":"ABC1234", "maxdepth":20}'
+
+0. 启动虚拟机slave1,slave2,slave3
+```
+VBoxManage list vms
+VBoxManage startvm slave1 --type headless
+VBoxManage startvm slave2 --type headless
+VBoxManage startvm slave3 --type headless
+```
 
 如果爬取中断了，重启master。然后依次
 1. 先启动zk集群。进入slave1,slave2,slave3启动每一台机器的zk。
@@ -149,3 +157,7 @@ cd /media/ubuntu/Working/elasticsearch/filebeat-7.10.0-linux-x86_64
 5. 进入master，运行start_all.sh，即可重新开始爬取进程。这时如果docker的resis-service中数据没有丢失，队列里还有需要爬的网址时，可以继续爬。
 
 
+
+** 更新filebeat.yml **
+
+需要把`json.message_key: log`注释掉，因为日志的json里面没有这个健。

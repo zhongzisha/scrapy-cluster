@@ -496,9 +496,9 @@ class KafkaMonitor(object):
             raise
 
     def close(self):
-        '''
+        """
         Call to properly tear down the Kafka Monitor
-        '''
+        """
         if self.consumer is not None:
             self.consumer.close()
 

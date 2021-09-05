@@ -5,9 +5,9 @@ from scrapy import signals
 
 
 class RedisSpider(Spider):
-    '''
+    """
     Base Spider for doing distributed crawls coordinated through Redis
-    '''
+    """
 
     def _set_crawler(self, crawler):
         super(RedisSpider, self)._set_crawler(crawler)
@@ -18,19 +18,19 @@ class RedisSpider(Spider):
         raise DontCloseSpider
 
     def parse(self, response, **kwargs):
-        '''
+        """
         Parse a page of html, and yield items into the item pipeline
 
         @param response: The response object of the scrape
-        '''
+        """
         raise NotImplementedError("Please implement parse() for your spider")
 
     def set_logger(self, logger):
-        '''
+        """
         Set the logger for the spider, different than the default Scrapy one
 
         @param logger: the logger from the scheduler
-        '''
+        """
         self._logger = logger
 
     def reconstruct_headers(self, response):
