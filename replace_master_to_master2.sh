@@ -1,0 +1,1 @@
+find . -name "settings.py" -not -path "*venv*" | xargs grep -rl "master*" | xargs sed -i 's/master/master2/g'

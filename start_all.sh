@@ -7,8 +7,12 @@ if [ ! -d ${LOG_DIR} ]; then
 fi
 
 if [ ! -d venv ]; then
+  sudo apt install -y build-essential gcc g++ python3-virtualenv python3-dev
   virtualenv venv
   source venv/bin/activate
+  pip install pip -U
+  pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+  # pip install -r requirements_has_versions.txt
   pip install -r requirements.txt
   pip install -e scutils-1.2.0
 else

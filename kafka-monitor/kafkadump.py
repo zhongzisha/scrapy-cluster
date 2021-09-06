@@ -161,6 +161,11 @@ def main():
                         print(json.dumps(item, indent=4))
                     else:
                         print(item)
+
+                    if num_records < 10:
+                        with open("/tmp/page_%d.html" % num_records, 'w') as fp:
+                            fp.write(item["body"])
+
                     num_records = num_records + 1
                     total_bytes = total_bytes + body_bytes
             except KeyboardInterrupt:
