@@ -19,7 +19,7 @@ else
   source venv/bin/activate
 fi
 
-SESSION=scrapy_cluster
+SESSION=sc
 
 tmux new-session -d -s $SESSION bash      # 开启一个会话，单个窗口
 tmux split-window -h bash     # 水平分裂一个窗口，左右两个窗口
@@ -34,8 +34,10 @@ tmux send -t $SESSION:0.0 "source venv/bin/activate; cd kafka-monitor; python ka
 tmux send -t $SESSION:0.1 "source venv/bin/activate; cd redis-monitor; python redis_monitor.py" C-m
 tmux send -t $SESSION:0.2 "source venv/bin/activate; cd rest; python rest_service.py" C-m
 tmux send -t $SESSION:0.3 "source venv/bin/activate; cd crawler; scrapy runspider crawling/spiders/link_spider.py" C-m
-# tmux send -t $SESSION:0.4 "source venv/bin/activate; cd kafka-monitor; python kafkadump.py dump -t demo.crawled_firehose -p" C-m
 
+if [ $HOSTNAME = "master2" ]; then
+  tmux send -t $SESSION:0.4 "source venv/bin/activate; cd kafka-monitor; python kafkadump.py dump -t demo.crawled_firehose -p" C-m
+fi
 # tmux -2 attach-session -d
 
 tmux detach   # 关闭当前tmux窗口，但是会后台运行

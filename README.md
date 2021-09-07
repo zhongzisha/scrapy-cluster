@@ -81,7 +81,8 @@ python kafkadump.py dump -t demo.crawled_firehose -p
 python kafkadump.py dump -t demo.outbound_firehose -p
 curl http://localhost:5343   # 查看restful服务状态
 # 向集群提交一个爬取请求
-curl http://localhost:5343/feed -H "Content-Type: application/json" -d '{"url": "http://msn.com", "appid":"testapp", "crawlid":"ABC1234", "maxdepth":2}'
+curl http://localhost:5343/feed -H "Content-Type: application/json" -d '{"url": "http://msn.com", "appid":"msn", "crawlid":"msn", "maxdepth":2}'
+curl http://localhost:5343/feed -H "Content-Type: application/json" -d '{"url": "http://sina.com", "appid":"sina", "crawlid":"sina", "maxdepth":2}'
 ```
 
 在slave1, slave2, slave3上进行以下操作，可以看到每个机器都在进行爬取
@@ -161,3 +162,51 @@ cd /media/ubuntu/Working/elasticsearch/filebeat-7.10.0-linux-x86_64
 ** 更新filebeat.yml **
 
 需要把`json.message_key: log`注释掉，因为日志的json里面没有这个健。
+
+# 2021-09-06 下面的环境下可以成功了！
+```
+-rw-rw-r--  1 ubuntu ubuntu   35101802 Sep  6 09:30 filebeat-7.14.1-linux-x86_64.tar.gz
+-rw-rw-r--  1 ubuntu ubuntu  363072947 Sep  6 09:30 logstash-7.14.1-linux-x86_64.tar.gz
+-rw-rw-r--  1 ubuntu ubuntu  285786508 Sep  6 09:30 kibana-7.14.1-linux-x86_64.tar.gz
+-rw-rw-r--  1 ubuntu ubuntu  344049417 Sep  6 09:29 elasticsearch-7.14.1-linux-x86_64.tar.gz
+-rw-rw-r--  1 ubuntu ubuntu  282908885 Sep  6 09:29 hbase-2.4.5-bin.tar.gz
+-rw-rw-r--  1 ubuntu ubuntu  408587111 Sep  6 09:28 hadoop-2.10.1.tar.gz
+-rw-rw-r--  1 ubuntu ubuntu  286170958 Sep  6 09:27 apache-hive-2.3.9-bin.tar.gz
+-rw-rw-r--  1 ubuntu ubuntu  605187279 Sep  6 09:26 hadoop-3.3.1.tar.gz
+-rw-rw-r--  1 ubuntu ubuntu   71403603 Sep  6 09:23 kafka_2.13-2.8.0.tgz
+-rw-rw-r--  1 ubuntu ubuntu   12387614 Sep  6 09:23 apache-zookeeper-3.7.0-bin.tar.gz
+-rw-rw-r--  1 ubuntu ubuntu   90745732 Sep  6 08:25 virtualbox-6.1_6.1.26-145957~Ubuntu~eoan_amd64.deb
+-rw-rw-r--  1 ubuntu ubuntu   11134336 Sep  6 08:25 Oracle_VM_VirtualBox_Extension_Pack-6.1.26.vbox-extpack
+-rw-rw-r--  1 ubuntu ubuntu 3071934464 Sep  6 08:24 ubuntu-20.04.3-desktop-amd64.iso
+```
+
+
+elk的地址：http://kibana:5601/
+
+
+
+
+
+zip -r /home/ubuntu/zk_hadoop_hbase_kafka_configs.zip apache-zookeeper-3.7.0-bin/conf/ hadoop-2.10.1/etc/ hbase-2.4.5/conf/ kafka_2.13-2.8.0/config/
+
+sudo groupadd docker
+sudo usermod -a -G docker ubuntu
+
+vim /etc/sysctl.conf
+vm.max_map_count=262144
+
+
+设置端口转发
+sudo iptables -t nat -A PREROUTING -p tcp -d 192.168.1.104 --dport 5601 -j DNAT --to-destination 192.168.56.1:5601
+sudo iptables -t nat -A POSTROUTING -j MASQUERADE
+
+
+
+
+
+
+
+
+
+
+

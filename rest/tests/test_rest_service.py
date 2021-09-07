@@ -15,6 +15,7 @@ from kafka.errors import OffsetOutOfRangeError
 from kafka.conn import ConnectionStates
 from redis.exceptions import ConnectionError
 
+
 class Override(RestService):
 
     @log_call("test logger")
@@ -69,7 +70,7 @@ class TestRestService(TestCase):
 
         # handle kafka offset errors
         self.rest_service.consumer = MagicMock(
-                        side_effect=OffsetOutOfRangeError("1"))
+            side_effect=OffsetOutOfRangeError("1"))
         try:
             self.rest_service._process_messages()
         except OffsetOutOfRangeError:
@@ -131,7 +132,6 @@ class TestRestService(TestCase):
         self.rest_service.redis_conn.set = MagicMock(side_effect=ConnectionError)
         self.rest_service._send_result_to_redis({'uuid': 'abc'})
         self.assertTrue(self.rest_service._spawn_redis_connection_thread.called)
-
 
     def test_check_kafka_disconnect(self):
         # connection setup
@@ -568,6 +568,7 @@ class TestRestService(TestCase):
 
         # test with uuid, got response
         time_list = [0, 1, 2, 3, 4, 5]
+
         def fancy_get_time():
             r = time_list.pop(0)
             # fake multithreaded response from kafka
@@ -591,6 +592,7 @@ class TestRestService(TestCase):
 
         # test with uuid, no response
         time_list = [0, 1, 2, 3, 4, 5, 6]
+
         def fancy_get_time2():
             return time_list.pop(0)
 
@@ -709,4 +711,3 @@ class TestRestService(TestCase):
             self.assertEquals(results[1], 500)
 
         self.rest_service.validator = orig
-
