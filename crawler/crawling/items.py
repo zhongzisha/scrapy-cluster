@@ -15,6 +15,7 @@ class RawResponseItem(Item):
     response_headers = Field()
     request_headers = Field()
     body = Field()
+    encoding = Field()
     links = Field()
     attrs = Field()
     success = Field()

@@ -145,6 +145,7 @@ def main():
                     val = message.value
                     try:
                         item = json.loads(val)
+                        print(num_records, 'encoding', item['encoding'])
                         if args['decode_base64'] and 'body' in item:
                             # item['body'] = base64.b64decode(item['body'].encode('utf-8'))
                             # item['body'] = str(base64.b64decode(item['body'].encode('utf-8')))
@@ -162,8 +163,8 @@ def main():
                     else:
                         print(item)
 
-                    if num_records < 10:
-                        with open("/tmp/page_%d.html" % num_records, 'w') as fp:
+                    if num_records < 50:
+                        with open("/tmp/page_%d_%s.html" % (num_records, item['encoding']), 'w') as fp:
                             fp.write(item["body"])
 
                     num_records = num_records + 1

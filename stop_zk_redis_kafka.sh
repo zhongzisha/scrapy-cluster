@@ -8,6 +8,23 @@
 #-e KAFKA_LISTENERS=PLAINTEXT://:9092 --link zookeeper-service:zk  -p 9092:9092 -t wurstmeister/kafka
 
 
+cd /opt/kafka_2.13-2.8.0/bin/ || ./kafka-server-stop.sh
+
+ssh slave2 "cd /opt/kafka_2.13-2.8.0/bin/; ./kafka-server-stop.sh"
+ssh slave3 "cd /opt/kafka_2.13-2.8.0/bin/; ./kafka-server-stop.sh"
+
+ssh slave1 "cd /opt/apache-zookeeper-3.7.0-bin/bin; ./zkServer.sh stop"
+sleep 2
+ssh slave2 "cd /opt/apache-zookeeper-3.7.0-bin/bin; ./zkServer.sh stop"
+sleep 2
+ssh slave3 "cd /opt/apache-zookeeper-3.7.0-bin/bin; ./zkServer.sh stop"
+sleep 2
+
+
+sleep 10
+
+tmux kill-window -t elk
+
 
 
 

@@ -39,7 +39,10 @@ class LinkSpider(RedisSpider):
         item["status_msg"] = "OK"
         item["response_headers"] = self.reconstruct_headers(response)
         item["request_headers"] = None # response.request.headers
-        item["body"] = response.body
+        # item["body"] = response.body if response.encoding == 'utf-8' \
+        #     else response.body.decode(response.encoding).encode('utf-8')  # response.body
+        item["body"] = response.body.decode(response.encoding).encode('utf-8')
+        item["encoding"] = response.encoding
         item["links"] = []
 
         # determine whether to continue spidering
